@@ -1,0 +1,76 @@
+class MatrixQuestions{
+    public static void main(String[] args) {
+        
+    }
+}
+
+public class Solution {
+    // Approach with O(NxM + NxM) TC and T(N+M) SC
+    public static void setZeros(int matrix[][]) {
+        // Write your code here..
+        int n = matrix.length; 
+        int m = matrix[0].length;
+        
+        int[] rows = new int[n];
+        int[] cols = new int[m];
+        
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<m; j++) {
+                if (matrix[i][j] == 0) {
+                    rows[i] = 1;
+                    cols[j] = 1;
+                }
+            }
+        }
+        
+        for (int i=0; i<n; i++) {
+            if (rows[i] == 1) {
+                for (int j=0; j<m; j++) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        
+        for (int i=0; i<m; i++) {
+            if (cols[i] == 1) {
+                for (int j=0; j<n; j++) {
+                    matrix[j][i] = 0;
+                }
+            }
+        }
+    }
+
+    // Approach with O(NxM X NxM) TC and (O(NxM) SC)
+    static void setMatrixZeroes(int[][] matrix) {
+        int n = matrix.length;
+            int m = matrix[0].length;
+    
+            boolean[][] bol = new boolean[n][m];
+    
+            for (int i=0; i<n; i++) {
+                for (int j=0; j<m; j++) {
+                    if (matrix[i][j] == 0) bol[i][j] = true;
+                }
+            }
+    
+            for (int i=0; i<n; i++) {
+                for (int j=0; j<m; j++) {
+                    if (bol[i][j] == true) {
+                        makeRowZeros(matrix,i,m);
+                        makeColumnZeros(matrix,j,n);
+                    } 
+                }
+            }
+      }
+        public static void makeRowZeros(int m[][],int row,int len) {
+            for (int i=0; i<len; i++) {
+                m[row][i] = 0;
+            }
+        }
+        public static void makeColumnZeros(int m[][], int col,int len) {
+            for (int i=0; i<len; i++) {
+                m[i][col] = 0;
+            }
+        }
+
+}
